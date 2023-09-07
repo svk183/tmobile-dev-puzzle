@@ -19,7 +19,7 @@ import { Subscription } from 'rxjs';
 export class BookSearchComponent implements OnInit, OnDestroy {
   books: ReadingListBook[];
   subscriptions: Subscription[] = [];
-  previousTerm: string = '';
+  previousTerm = '';
 
   searchForm = this.fb.group({
     term: ''
@@ -42,7 +42,6 @@ export class BookSearchComponent implements OnInit, OnDestroy {
         this.books = books;
       }
     }));
-    console.log(this.searchForm.value.term,this.previousTerm);
   }
 
   formatDate(date: void | string) {
