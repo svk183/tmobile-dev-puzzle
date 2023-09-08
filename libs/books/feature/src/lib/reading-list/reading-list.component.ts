@@ -37,7 +37,11 @@ export class ReadingListComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.isLoaded = changes.isLoaded.currentValue; 
+    this.isLoaded = changes.isLoaded.currentValue;
+    // Closing/resetting all the date pickers open state
+    if(this.isLoaded) {
+      this.pickDate = this.pickDate.map(x=>false);
+    }
   }
 
   getFormatedDate() {
