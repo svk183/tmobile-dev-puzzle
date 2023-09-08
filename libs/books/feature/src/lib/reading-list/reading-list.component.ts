@@ -13,6 +13,7 @@ export class ReadingListComponent implements OnChanges {
   @Input() isLoaded: boolean;
   pickDate = [];
   selectedDate: string;
+  today = new Date();
   
   constructor(private readonly store: Store) {}
 

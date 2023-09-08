@@ -10,12 +10,14 @@
       </div>
       <div *ngIf="b.finished">Finished On: {{b.finishedDate}}</div>
     </div>
-    <mat-form-field *ngIf="pickDate[i] && !b.finished" class="datePicker">
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (dateChange)="markBookAsFinished(b,i)">
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+    <div class="datePicker" [ngClass]="pickDate[i] ? 'show' : 'hide'">
+      <mat-form-field *ngIf="pickDate[i] && !b.finished" >
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" [max]="today" [(ngModel)]="selectedDate" (dateChange)="markBookAsFinished(b,i)">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
     <div>
       <button
         mat-icon-button
