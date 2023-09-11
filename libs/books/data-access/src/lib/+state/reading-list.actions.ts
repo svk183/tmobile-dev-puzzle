@@ -24,7 +24,7 @@ export const updateReadingList = createAction(
 
 export const updateFailedInReadingList = createAction(
   '[Books Search Results] Failed to Update list',
-  props<{ item: ReadingListItem }>()
+  props<{ error: string }>()
 );
 
 export const updateFinishStateToReadingList = createAction(

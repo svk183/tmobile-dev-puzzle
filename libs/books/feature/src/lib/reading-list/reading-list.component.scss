@@ -48,8 +48,6 @@
 
 .datePicker {
   max-height: 60px !important;
-  opacity: 0;
-  max-width: 0;
   overflow: hidden;
   transition: max-width 0.4s ease-in-out, opacity 0.4s ease-in-out;
 }

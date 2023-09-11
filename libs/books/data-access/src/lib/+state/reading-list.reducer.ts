@@ -41,7 +41,7 @@ const readingListReducer = createReducer(
       loaded: true
     });
   }),
-  on(ReadingListActions.loadReadingListError, (state, action) => {
+  on(ReadingListActions.loadReadingListError || ReadingListActions.updateFailedInReadingList, (state, action) => {
     return {
       ...state,
       error: action.error
