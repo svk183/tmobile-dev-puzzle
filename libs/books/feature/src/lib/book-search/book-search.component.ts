@@ -41,7 +41,11 @@ export class BookSearchComponent implements OnInit, OnDestroy {
     // storing the store subsciber in the subscriptions array - which can be used as reference during unSubscribe.
     this.subscriptions.push(this.store.select(getAllBooks).subscribe(books => {
       // Comparing old object and the new object - to avoid unnecessary page/HTML load
-      if(JSON.stringify(this.books) !== JSON.stringify(books)) {
+      try {
+        if(JSON.stringify(this.books) !== JSON.stringify(books)) {
+          this.books = books;
+        }
+      } catch(e) {
         this.books = books;
       }
     }));
@@ -77,9 +81,9 @@ export class BookSearchComponent implements OnInit, OnDestroy {
   }
 
   searchBooks() {
-    this.previousTerm = this.searchForm.value.term;
+    this.previousTerm = this.searchTerm;
 
-    if (this.searchForm.value.term) {
+    if (this.searchTerm) {
       this.store.dispatch(searchBooks({ term: this.searchTerm }));
     } else {
       this.store.dispatch(clearSearch());

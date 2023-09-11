@@ -10,7 +10,7 @@ import { failedRemoveFromReadingList, getReadingList, removeFromReadingList } fr
 })
 export class ReadingListComponent implements OnChanges {
   readingList$ = this.store.select(getReadingList);
-  // This field is used to show/hide the component only when the toggle is ON/OFF
+  // This field is used to show/hide the component when the toggle is ON/OFF
   @Input() isLoaded: boolean;
 
   constructor(private readonly store: Store,
@@ -35,6 +35,6 @@ export class ReadingListComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.isLoaded = changes.isLoaded.currentValue; 
+    this.isLoaded = changes?.isLoaded?.currentValue; 
   }
 }
