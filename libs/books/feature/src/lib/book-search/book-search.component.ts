@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import {
   addToReadingList,
   clearSearch,
@@ -15,8 +16,10 @@ import { Book } from '@tmo/shared/models';
   templateUrl: './book-search.component.html',
   styleUrls: ['./book-search.component.scss']
 })
-export class BookSearchComponent implements OnInit {
+export class BookSearchComponent implements OnInit, OnDestroy {
   books: ReadingListBook[];
+  subscriptions: Subscription[] = [];
+  previousTerm = '';
 
   searchForm = this.fb.group({
     term: ''
@@ -32,9 +35,17 @@ export class BookSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.select(getAllBooks).subscribe(books => {
-      this.books = books;
-    });
+    // storing the store subsciber in the subscriptions array - which can be used as reference during unSubscribe.
+    this.subscriptions.push(this.store.select(getAllBooks).subscribe(books => {
+      // Comparing old object and the new object - to avoid unnecessary page/HTML load
+      try {
+        if(JSON.stringify(this.books) !== JSON.stringify(books)) {
+          this.books = books;
+        }
+      } catch(e) {
+        this.books = books;
+      }
+    }));
   }
 
   formatDate(date: void | string) {
@@ -53,10 +64,16 @@ export class BookSearchComponent implements OnInit {
   }
 
   searchBooks() {
-    if (this.searchForm.value.term) {
+    this.previousTerm = this.searchTerm;
+
+    if (this.searchTerm) {
       this.store.dispatch(searchBooks({ term: this.searchTerm }));
     } else {
       this.store.dispatch(clearSearch());
     }
+  }
+
+  ngOnDestroy(): void {
+      this.subscriptions?.forEach(sub=>sub.unsubscribe());
   }
 }
