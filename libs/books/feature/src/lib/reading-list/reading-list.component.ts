@@ -24,12 +24,10 @@ export class ReadingListComponent implements OnChanges {
 
   snackBarFunctionality(item) {
     // code to open the Snackbar
-    const snackBarRef = this.snackBar.open('Removed Book from Read List', 'UNDO', {
+    this.snackBar.open('Removed Book from Read List', 'UNDO', {
       duration: 2000
-    });
-
-    // Action triggers when user clicks on Undo button of snackbar, where we are adding back the book to readlist
-    snackBarRef.onAction().subscribe(() => {
+    }).onAction().subscribe(() => {
+      // Action triggers when user clicks on Undo button of snackbar, where we are adding back the book to readlist
       this.store.dispatch(failedRemoveFromReadingList({ item }));
     });
   }
