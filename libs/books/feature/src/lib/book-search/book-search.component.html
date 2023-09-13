@@ -34,6 +34,7 @@
           <div>
             <button
               mat-flat-button
+              data-testing="add-book"
               color="primary"
               (click)="addBookToReadingList(b)"
               [disabled]="b.isAdded"
