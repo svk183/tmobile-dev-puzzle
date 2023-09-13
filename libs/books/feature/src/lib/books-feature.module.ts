@@ -9,6 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 import { TotalCountComponent } from './total-count/total-count.component';
 import { ReadingListComponent } from './reading-list/reading-list.component';
 
@@ -26,6 +28,8 @@ const EXPORTS = [
     MatIconModule,
     MatInputModule,
     MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild([

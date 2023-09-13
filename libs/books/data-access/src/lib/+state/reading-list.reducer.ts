@@ -41,7 +41,7 @@ const readingListReducer = createReducer(
       loaded: true
     });
   }),
-  on(ReadingListActions.loadReadingListError, (state, action) => {
+  on(ReadingListActions.loadReadingListError || ReadingListActions.updateFailedInReadingList, (state, action) => {
     return {
       ...state,
       error: action.error
@@ -49,6 +49,9 @@ const readingListReducer = createReducer(
   }),
   on(ReadingListActions.addToReadingList, (state, action) =>
     readingListAdapter.addOne({ bookId: action.book.id, ...action.book }, state)
+  ),
+  on(ReadingListActions.updateFinishStateToReadingList, (state, action) =>
+    readingListAdapter.updateOne({ id: action.item.bookId, changes: action.item }, state)
   ),
   on(ReadingListActions.removeFromReadingList, (state, action) =>
     readingListAdapter.removeOne(action.item.bookId, state)

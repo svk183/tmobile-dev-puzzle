@@ -17,6 +17,21 @@ export const addToReadingList = createAction(
   props<{ book: Book }>()
 );
 
+export const updateReadingList = createAction(
+  '[Books Search Results] Update list',
+  props<{ item: ReadingListItem }>()
+);
+
+export const updateFailedInReadingList = createAction(
+  '[Books Search Results] Failed to Update list',
+  props<{ error: string }>()
+);
+
+export const updateFinishStateToReadingList = createAction(
+  '[Books Search Results] Update finish state in list',
+  props<{ item: ReadingListItem }>()
+);
+
 export const failedAddToReadingList = createAction(
   '[Reading List API] Failed add to list',
   props<{ book: Book }>()
